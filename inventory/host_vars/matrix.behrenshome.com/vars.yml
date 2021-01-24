@@ -1,0 +1,54 @@
+# The bare domain name which represents your Matrix identity.
+# Matrix user ids for your server will be of the form (`@user:<matrix-domain>`).
+#
+# Note: this playbook does not touch the server referenced here.
+# Installation happens on another server ("matrix.<matrix-domain>").
+#
+# If you've deployed using the wrong domain, you'll have to run the Uninstalling step,
+# because you can't change the Domain after deployment.
+#
+# Example value: example.com
+matrix_domain: behrenshome.com
+
+# This is something which is provided to Let's Encrypt when retrieving SSL certificates for domains.
+#
+# In case SSL renewal fails at some point, you'll also get an email notification there.
+#
+# If you decide to use another method for managing SSL certifites (different than the default Let's Encrypt),
+# you won't be required to define this variable (see `docs/configuring-playbook-ssl-certificates.md`).
+#
+# Example value: someone@example.com
+matrix_ssl_lets_encrypt_support_email: "isaac@behrenshome.com"
+
+# A shared secret (between Coturn and Synapse) used for authentication.
+# You can put any string here, but generating a strong one is preferred (e.g. `pwgen -s 64 1`).
+matrix_coturn_turn_static_auth_secret: "FK6AQJS07Ugy2slx0RrwgtCFWXUwEFebrTUa3EbYRTUsYL8ohsy7BXs29jDFQvdn"
+
+# A secret used to protect access keys issued by the server.
+# You can put any string here, but generating a strong one is preferred (e.g. `pwgen -s 64 1`).
+matrix_synapse_macaroon_secret_key: "fWQeHTravF91xx6xCawelJLRB8jiqKCQBRkBJQYpF5vOaGDtmEafDxUZzgfM8R0M"
+
+# A Postgres password to use for the superuser Postgres user (called `matrix` by default).
+#
+# The playbook creates additional Postgres users and databases (one for each enabled service)
+# using this superuser account.
+matrix_postgres_connection_password: "cJm6j7Z46jVF5uWzOoUXEJdYFyYZ1LItqVQOKt78yos73JT6y993ywDiiUw4mB67"
+
+matrix_synapse_report_stats: true
+
+matrix_synapse_allow_public_rooms_over_federation: true
+
+matrix_synapse_federation_enabled: true
+
+matrix_synapse_admin_enabled: true
+
+matrix_nginx_proxy_base_domain_serving_enabled: true
+#
+# Dimensions Vars
+
+# matrix_dimension_enabled: true
+
+# matrix_dimension_admins:
+#   - "@ibehr:behrenshome.com"
+
+# matrix_dimension_access_token: "MDAxZGxvY2F0aW9uIGJlaHJlbnNob21lLmNvbQowMDEzaWRlbnRpZmllciBrZXkKMDAxMGNpZCBnZW4gPSAxCjAwMmRjaWQgdXNlcl9pZCA9IEBkaW1lbnNpb246YmVocmVuc2hvbWUuY29tCjAwMTZjaWQgdHlwZSA9IGFjY2VzcwowMDIxY2lkIG5vbmNlID0gflpqZitnYTdpUUJhQ3dORQowMDJmc2lnbmF0dXJlIFmX60oGwDqLdApJuqRnFx1h76hIjaPAFS_QkDi60Gj5Cg"
